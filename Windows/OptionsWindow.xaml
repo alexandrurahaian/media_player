@@ -49,6 +49,10 @@
                     <TextBlock FontFamily="Arial" FontSize="11" Text="Delete backups older than: " Foreground="{DynamicResource ForegroundBrush}"/>
                     <TextBox x:Name="backup_lifespan_box" Text="7" Margin="90, 0, 0, 0" FontFamily="Arial" FontSize="10" Background="{DynamicResource BackgroundBrush}" BorderBrush="{DynamicResource ForegroundBrush}" TextAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" Width="26"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+                    <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Automatically update app" FontSize="11" FontFamily="Arial" TextAlignment="Center"/>
+                    <CheckBox x:Name="auto_update_check" IsChecked="False" Click="auto_update_check_Click" FontFamily="Arial" FontSize="11" Margin="104.5, 0, 0, 0"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Viewbox>

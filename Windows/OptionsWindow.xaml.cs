@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,13 @@ namespace Media_Player
             {
                 compact_aot_panel.Visibility = Visibility.Collapsed;
             }
+
+            if (File.Exists(System.IO.Path.Combine(AppContext.BaseDirectory, "auto_update.cfg")))
+            {
+                string val = File.ReadAllText(System.IO.Path.Combine(AppContext.BaseDirectory, "auto_update.cfg"));
+                auto_update_check.IsChecked = val.ToLower().Contains("true");
+            }
+            else auto_update_check.IsChecked = false;
 
             resume_checkbox.IsChecked = settings.resume_on_enter;
             save_opened_files_checkbox.IsChecked = settings.save_files;
@@ -158,6 +166,32 @@ namespace Media_Player
         {
             settings.delete_old_backups = auto_remove_backups.IsChecked == true;
             lifespan_panel.Visibility = (auto_remove_backups.IsChecked == true ? Visibility.Visible : Visibility.Hidden);
+        }
+
+        private void auto_update_check_Click(object sender, RoutedEventArgs e)
+        {
+            string auto_update_file = System.IO.Path.Combine(AppContext.BaseDirectory, "auto_update.cfg");
+            try
+            {
+                if (File.Exists(auto_update_file))
+                {
+                    bool auto_update = (File.ReadAllText(auto_update_file) == "true" ? true : false);
+
+                    if (auto_update && auto_update_check.IsChecked == false)
+                        File.WriteAllText(auto_update_file, "false");
+                    else if (!auto_update && auto_update_check.IsChecked == true)
+                        File.WriteAllText(auto_update_file, "true");
+                }
+                else
+                {
+                    string to_write = (auto_update_check.IsChecked == true).ToString().ToLower();
+                    File.WriteAllText(auto_update_file, to_write);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Could not change auto update file: {ex.Message}\n{ex.StackTrace}");
+            }
         }
     }
 }
