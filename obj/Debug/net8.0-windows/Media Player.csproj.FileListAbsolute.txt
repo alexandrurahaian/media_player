@@ -1,28 +1,5 @@
-D:\Repos\Media Player\bin\Debug\net8.0-windows\media.db
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.csproj.AssemblyReference.cache
-D:\Repos\Media Player\obj\Debug\net8.0-windows\MainWindow.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Pages\PlaylistPage.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\CompactWindow.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\OptionsWindow.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\PlaylistEditPage.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\SelectPlaylistWindow.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\StatsWindow.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\App.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player_Content.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player_MarkupCompile.cache
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player_MarkupCompile.lref
-D:\Repos\Media Player\obj\Debug\net8.0-windows\App.baml
-D:\Repos\Media Player\obj\Debug\net8.0-windows\MainWindow.baml
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Pages\PlaylistPage.baml
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\CompactWindow.baml
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\OptionsWindow.baml
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\PlaylistEditPage.baml
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\SelectPlaylistWindow.baml
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\StatsWindow.baml
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.g.resources
-D:\Repos\Media Player\obj\Debug\net8.0-windows\refint\Media Player.dll
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.pdb
 D:\Repos\Media Player\bin\Debug\net8.0-windows\app_config.json
+D:\Repos\Media Player\bin\Debug\net8.0-windows\media.db
 D:\Repos\Media Player\bin\Debug\net8.0-windows\Media Player.exe
 D:\Repos\Media Player\bin\Debug\net8.0-windows\Media Player.dll.config
 D:\Repos\Media Player\bin\Debug\net8.0-windows\Media Player.deps.json
@@ -41,6 +18,29 @@ D:\Repos\Media Player\bin\Debug\net8.0-windows\runtimes\linux-x64\native\SQLite.
 D:\Repos\Media Player\bin\Debug\net8.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
 D:\Repos\Media Player\bin\Debug\net8.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
 D:\Repos\Media Player\bin\Debug\net8.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.csproj.AssemblyReference.cache
+D:\Repos\Media Player\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Pages\PlaylistPage.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\CompactWindow.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\ExportWindow.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\OptionsWindow.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\PlaylistEditPage.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\SelectPlaylistWindow.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\StatsWindow.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\App.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player_Content.g.cs
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player_MarkupCompile.cache
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player_MarkupCompile.lref
+D:\Repos\Media Player\obj\Debug\net8.0-windows\App.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\MainWindow.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Pages\PlaylistPage.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\CompactWindow.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\ExportWindow.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\OptionsWindow.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\PlaylistEditPage.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\SelectPlaylistWindow.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\StatsWindow.baml
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.g.resources
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.GeneratedMSBuildEditorConfig.editorconfig
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.AssemblyInfoInputs.cache
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.AssemblyInfo.cs
@@ -48,7 +48,7 @@ D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.csproj.CoreCompileIn
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.sourcelink.json
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Pl.6759EB6C.Up2Date
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.dll
+D:\Repos\Media Player\obj\Debug\net8.0-windows\refint\Media Player.dll
+D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.pdb
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.genruntimeconfig.cache
 D:\Repos\Media Player\obj\Debug\net8.0-windows\ref\Media Player.dll
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\ExportWindow.g.cs
-D:\Repos\Media Player\obj\Debug\net8.0-windows\Windows\ExportWindow.baml
