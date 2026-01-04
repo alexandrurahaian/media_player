@@ -8,8 +8,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Sprites\Light\media_player.ico</ApplicationIcon>
-    <FileVersion>1.4.0</FileVersion>
-    <AssemblyVersion>1.4.0</AssemblyVersion>
+    <FileVersion>1.4.1</FileVersion>
+    <AssemblyVersion>1.4.1</AssemblyVersion>
+    <Company></Company>
+    <Description>C# lightweight media player with playlist support.</Description>
+    <Copyright>©️ Răhăian Alexandru 2025-2026</Copyright>
+    <PackageProjectUrl>https://github.com/alexandrurahaian/media_player</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alexandrurahaian/media_player</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>c# media player wpf</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

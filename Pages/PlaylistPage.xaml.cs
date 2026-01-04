@@ -63,6 +63,7 @@ namespace Media_Player.Objects
         public PlaylistPage(ItemCollection selected_items)
         {
             InitializeComponent();
+            this.DataContext = this;
             previously_extracted = selected_items;
             foreach (ListViewItem item in selected_items)
             {
@@ -344,6 +345,17 @@ namespace Media_Player.Objects
         private void opened_files_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             count_display.Text = $"Selected files: {opened_files_list.SelectedItems.Count}";
+        }
+
+        private void playlist_page_display_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.Delete) && opened_files_list.SelectedItems.Count > 0 && MessageBox.Show($"Are you sure you want to delete selected items?", "Deleting selected...", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                for (int i = opened_files_list.SelectedItems.Count - 1; i >= 0; i--)
+                {
+                    opened_files_list.Items.Remove(opened_files_list.SelectedItems[i]);
+                }
+            }
         }
     }
 }

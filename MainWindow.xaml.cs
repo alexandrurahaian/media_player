@@ -107,7 +107,7 @@ namespace Media_Player
             {
                 App app = App.Current as App;
                 sprite_path = "/Dark/";
-                app.SwitchTheme();
+                app?.SwitchTheme();
             }
 
             playlist_page = new PlaylistPage(playlist_contents.Items);
@@ -128,6 +128,7 @@ namespace Media_Player
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (fetched_settings == null) return;
             if (fetched_settings.delete_old_backups == true)
             {
                 await Externals.ClearOldBackups(fetched_settings.backup_lifespan);
@@ -329,8 +330,6 @@ namespace Media_Player
                     playlist_page.opened_files_list.Items.Add(new_item);
                 }
             }
-
-            before_search_list = playlist_contents.Items.Cast<ListViewItem>().ToList();
 
             if (invalid_paths.Count > 0 && display_invalid)
             {
