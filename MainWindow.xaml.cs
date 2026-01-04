@@ -41,7 +41,7 @@ namespace Media_Player
         private PlaylistPage playlist_page;
         private PlaylistObject? opened_playlist = null;
 
-        public static AppSettings fetched_settings = null;
+        public static AppSettings? fetched_settings = null;
 
         public static bool is_looping = false;
         public static bool is_shuffled = false;
@@ -55,7 +55,6 @@ namespace Media_Player
         public Thread ?update_seek_bar_thread = null;
 
         private List<ListViewItem> previous_order = new List<ListViewItem>();
-        private List<ListViewItem> ?before_search_list = null;
 
         public static string format = @"mm\:ss";
         public static string sprite_path = "/Light/";
@@ -108,7 +107,7 @@ namespace Media_Player
             {
                 App app = App.Current as App;
                 sprite_path = "/Dark/";
-                app.SwitchTheme();
+                app?.SwitchTheme();
             }
 
             playlist_page = new PlaylistPage(playlist_contents.Items);
@@ -129,6 +128,7 @@ namespace Media_Player
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (fetched_settings == null) return;
             if (fetched_settings.delete_old_backups == true)
             {
                 await Externals.ClearOldBackups(fetched_settings.backup_lifespan);
@@ -331,8 +331,6 @@ namespace Media_Player
                 }
             }
 
-            before_search_list = playlist_contents.Items.Cast<ListViewItem>().ToList();
-
             if (invalid_paths.Count > 0 && display_invalid)
             {
                 string outP = string.Empty;
@@ -370,12 +368,12 @@ namespace Media_Player
             previously_bold_index = current_file_index;
         }
 
-        private void Unbolden()
-        {
-            if (playlist_contents.Items.Count <= 0) return;
-            ListViewItem? previous = playlist_contents.Items[previously_bold_index] as ListViewItem;
-            if (previous != null) previous.FontWeight = FontWeights.Normal;
-        }
+        //private void Unbolden()
+        //{
+        //    if (playlist_contents.Items.Count <= 0) return;
+        //    ListViewItem? previous = playlist_contents.Items[previously_bold_index] as ListViewItem;
+        //    if (previous != null) previous.FontWeight = FontWeights.Normal;
+        //}
 
         public async Task PlayMedia(string media_file_name, bool overwrite = false, bool increment = true, bool auto_play = true)
         {
@@ -985,61 +983,54 @@ namespace Media_Player
                 pause_btn.Content = new Image { Source = new BitmapImage(new Uri($"/Sprites{sprite_path}pause.png", UriKind.RelativeOrAbsolute)) };
             }
         }
-
-        private void RestoreItemsBeforeSearch()
-        {
-            if (before_search_list != null)
-            {
-                playlist_contents.Items.Clear();
-                int x = 0;
-                foreach (ListViewItem item in before_search_list)
-                {
-                    playlist_contents.Items.Add(item);
-                    ListViewItem n = playlist_contents.Items[x] as ListViewItem;
-                    n.FontWeight = FontWeights.Normal;
-
-                    if (video_out_display.Source != null && video_out_display.Source.LocalPath.Contains(item.Content.ToString()))
-                    {
-                        BoldenCurrentlyPlaying();
-                        current_file_index = x;
-                    }
-                    x++;
-                }
-            }
-        }
         private void opened_searchbox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
-            if (string.IsNullOrEmpty(opened_searchbox.Text))
-            {
-                Unbolden();
-                previously_bold_index = 0;
-                RestoreItemsBeforeSearch();
-                return;
-            }
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(playlist_contents.Items);
 
-            List<ListViewItem> results = new List<ListViewItem>();
-
-            foreach (ListViewItem item in playlist_contents.Items)
+            if (!string.IsNullOrEmpty(opened_searchbox.Text))
             {
-                if (item.Tag.ToString().ToLower().Contains(opened_searchbox.Text.ToLower()))
+                view.Filter = item =>
                 {
-                    results.Add(item);
-                }
+                    var listItem = item as ListViewItem;
+                    string v = listItem?.Content.ToString() ?? string.Empty;
+                    return v.Contains(opened_searchbox.Text, StringComparison.OrdinalIgnoreCase);
+                };
             }
+            else view.Filter = null;
 
-            if (results.Count > 0)
-            {
-                playlist_contents.Items.Clear();
-                foreach (ListViewItem result in  results)
-                {
-                    playlist_contents.Items.Add(result);
-                }
-            }
-            else if (results.Count <= 0)
-            {
-                RestoreItemsBeforeSearch();
-            }
+            // old implementation
+
+            //if (string.IsNullOrEmpty(opened_searchbox.Text))
+            //{
+            //    Unbolden();
+            //    previously_bold_index = 0;
+            //    RestoreItemsBeforeSearch();
+            //    return;
+            //}
+
+            //List<ListViewItem> results = new List<ListViewItem>();
+
+            //foreach (ListViewItem item in playlist_contents.Items)
+            //{
+            //    if (item.Tag.ToString().ToLower().Contains(opened_searchbox.Text.ToLower()))
+            //    {
+            //        results.Add(item);
+            //    }
+            //}
+
+            //if (results.Count > 0)
+            //{
+            //    playlist_contents.Items.Clear();
+            //    foreach (ListViewItem result in  results)
+            //    {
+            //        playlist_contents.Items.Add(result);
+            //    }
+            //}
+            //else if (results.Count <= 0)
+            //{
+            //    RestoreItemsBeforeSearch();
+            //}
         }
 
         private void info_menu_btn_Click(object sender, RoutedEventArgs e)

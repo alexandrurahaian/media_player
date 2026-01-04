@@ -9,8 +9,8 @@
       Title="PlaylistPage"
       x:Name="playlist_page_display"
       Background="{DynamicResource BackgroundBrush}"
+      KeyDown="playlist_page_display_KeyDown"
       >
-
     <Viewbox Stretch="Uniform">
         <Grid Height="450" Width="800">
             <TextBlock FontFamily="Arial" Foreground="{DynamicResource ForegroundBrush}" FontSize="14" Margin="18,35,662,396">Current playlists:</TextBlock>
