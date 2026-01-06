@@ -66,6 +66,8 @@ namespace Media_Player.Scripts
 
         private static bool IsVersionNewer(string? latest, string? current)
         {
+            Debug.WriteLine($"Latest version {latest}");
+            Debug.WriteLine(current);
             if (string.IsNullOrEmpty(latest) || string.IsNullOrEmpty(current)) return false;
 
             var latestParts = latest.Split('.').Select(int.Parse).ToArray();
@@ -75,18 +77,19 @@ namespace Media_Player.Scripts
             {
                 int l = i < latestParts.Length ? latestParts[i] : 0;
                 int c = i < currentParts.Length ? currentParts[i] : 0;
-
+                Debug.WriteLine(l > c);
+                Debug.WriteLine(l < c);
                 if (l > c) return true;
                 if (l < c) return false;
             }
 
-            return false;
+            return true;
         }
 
 
         public static async Task<bool?> IsLatestUpdater()
         {
-            return IsVersionNewer(LATEST_UPDATER_VER, CURRENT_UPDATER_VERSION);
+            return IsVersionNewer(await GetLatestVersion(), GetCurrentUpdaterVersion());
         }
 
         public static async Task CheckForUpdates()
