@@ -52,3 +52,4 @@ D:\Repos\Media Player\obj\Debug\net8.0-windows\refint\Media Player.dll
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.pdb
 D:\Repos\Media Player\obj\Debug\net8.0-windows\Media Player.genruntimeconfig.cache
 D:\Repos\Media Player\obj\Debug\net8.0-windows\ref\Media Player.dll
+D:\Repos\Media Player\bin\Debug\net8.0-windows\updater.exe

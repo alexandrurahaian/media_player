@@ -14,6 +14,7 @@ namespace Media_Player.Objects
         public bool drp { get; set; } = true;
         public bool delete_old_backups { get; set; } = false;
         public bool make_backups { get; set; } = true;
+        public bool announce_updater_ver { get; set; } = true;
         public int backup_lifespan { get; set; } = 60; // in days
     }
 }

@@ -80,10 +80,6 @@ namespace Media_Player
                 List<string> previouslySaved = SettingsHandler.GetPreviouslySavedFiles();
                 if (previouslySaved.Count > 0)
                 {
-                    foreach (string s in previouslySaved)
-                    {
-                        Console.WriteLine(s);
-                    }
                     LoadFiles(previouslySaved.ToArray(), false);
                 }
             }
@@ -129,6 +125,22 @@ namespace Media_Player
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (fetched_settings == null) return;
+            string auto_update_file = System.IO.Path.Combine(AppContext.BaseDirectory, "auto_update.cfg");
+            if (File.Exists(auto_update_file))
+            {
+                bool auto_update = File.ReadAllText(auto_update_file) == "true";
+                if (auto_update)
+                {
+                    await UpdateManager.CheckForUpdates();
+                }
+            }
+            else if (fetched_settings.announce_updater_ver == true)
+            {
+                bool? is_latest = await UpdateManager.IsLatestUpdater();
+                if (is_latest == false && MessageBox.Show($"Updater is not on the latest version. Would you like to update it? You can disable this popup from the settings.", "Updater is not up to date.", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                   await UpdateManager.CheckForUpdates();
+            }
+
             if (fetched_settings.delete_old_backups == true)
             {
                 await Externals.ClearOldBackups(fetched_settings.backup_lifespan);
