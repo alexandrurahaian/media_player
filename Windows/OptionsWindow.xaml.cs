@@ -53,9 +53,12 @@ namespace Media_Player
             save_opened_files_checkbox.IsChecked = settings.save_files;
             drp_checkbox.IsChecked = settings.drp;
             dark_mode_check.IsChecked = settings.theme == "dark";
+            announce_new_updater_ver.IsChecked = settings.announce_updater_ver;
             this.Closing += OptionsWindow_Closing;
             backup_lifespan_box.TextChanged += Backup_lifespan_box_TextChanged;
             actual = window;
+
+            announce_new_updater_ver_panel.Visibility = (auto_update_check.IsChecked == false ? Visibility.Visible : Visibility.Collapsed);
         }
 
         private void Backup_lifespan_box_TextChanged(object sender, TextChangedEventArgs e)
@@ -178,9 +181,16 @@ namespace Media_Player
                     bool auto_update = (File.ReadAllText(auto_update_file) == "true" ? true : false);
 
                     if (auto_update && auto_update_check.IsChecked == false)
+                    {
                         File.WriteAllText(auto_update_file, "false");
+                        settings.announce_updater_ver = true;
+                    }
                     else if (!auto_update && auto_update_check.IsChecked == true)
+                    {
                         File.WriteAllText(auto_update_file, "true");
+                        settings.announce_updater_ver = false;
+                    }
+                    announce_new_updater_ver_panel.Visibility = (auto_update ? Visibility.Collapsed : Visibility.Visible);
                 }
                 else
                 {
@@ -192,6 +202,11 @@ namespace Media_Player
             {
                 MessageBox.Show($"Could not change auto update file: {ex.Message}\n{ex.StackTrace}");
             }
+        }
+
+        private void announce_new_updater_ver_Click(object sender, RoutedEventArgs e)
+        {
+            settings.announce_updater_ver = announce_new_updater_ver.IsChecked == true;
         }
     }
 }

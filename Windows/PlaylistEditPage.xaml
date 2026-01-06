@@ -6,19 +6,20 @@
         xmlns:local="clr-namespace:Media_Player"
         mc:Ignorable="d"
         Background="{DynamicResource BackgroundBrush}"
-        Title="" Height="450" Width="800">
+        Title="" Height="450" Width="800"
+        Closing="Window_Closing">
     <Viewbox Stretch="Uniform">
         <Grid Width="804" Height="436">
             <TextBlock Foreground="{DynamicResource ForegroundBrush}" x:Name="playlist_item_count" FontFamily="Arial" FontSize="12" Text="Playlist Items: 0" Margin="10,10,559,410"/>
             <TextBlock Foreground="{DynamicResource ForegroundBrush}" FontFamily="Arial" FontSize="12" Text="Add songs" Margin="572,10,10,410"/>
-            <ListView x:Name="add_song_list" Background="{DynamicResource BackgroundBrush}" Margin="572,29,10,54">
+            <ListView x:Name="add_song_list" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}" Margin="572,29,10,54">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-            <ListView x:Name="playlist_contents" Background="{DynamicResource BackgroundBrush}" Margin="10,29,256,10" Width="auto" Height="auto">
+            <ListView x:Name="playlist_contents" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}" Margin="10,29,256,10" Width="auto" Height="auto">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>

@@ -53,6 +53,10 @@
                     <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Automatically update app" FontSize="11" FontFamily="Arial" TextAlignment="Center"/>
                     <CheckBox x:Name="auto_update_check" IsChecked="False" Click="auto_update_check_Click" FontFamily="Arial" FontSize="11" Margin="104.5, 0, 0, 0"/>
                 </StackPanel>
+                <StackPanel x:Name="announce_new_updater_ver_panel" Orientation="Horizontal" Margin="0, 5, 0, 0" Visibility="Visible">
+                    <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Announce new updater version" FontSize="11" FontFamily="Arial" TextAlignment="Center"/>
+                    <CheckBox x:Name="announce_new_updater_ver" IsChecked="False" Click="announce_new_updater_ver_Click" FontFamily="Arial" FontSize="11" Margin="76.5, 0, 0, 0"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Viewbox>

@@ -103,6 +103,7 @@ namespace Media_Player
                         new_item.Name = item.Name;
                         new_item.Content = item.Content;
                         new_item.Click += New_item_Click;
+                        new_item.Foreground = (Brush)Application.Current.Resources["ForegroundBrush"];
                         add_song_list.Items.Add(new_item);
                     }
                 }
@@ -132,15 +133,14 @@ namespace Media_Player
         private void Item_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox ?check_box = sender as CheckBox;
-            if (check_box != null && check_box.IsChecked == false)
+            if (check_box == null) return;
+            if (check_box.IsChecked == false)
             {
                 unchecked_items.Add(check_box.Tag.ToString());
-                
+                Debug.WriteLine(check_box.Tag.ToString());
             }
-            else if (check_box != null && (check_box.IsChecked == true && unchecked_items.Contains(check_box.Tag.ToString())))
-            {
+            else if (check_box.IsChecked == true && unchecked_items.Contains(check_box.Tag.ToString()))
                 unchecked_items.Remove(check_box.Tag.ToString());
-            }
         }
 
         private void confirm_btn_Click(object sender, RoutedEventArgs e)
@@ -148,9 +148,6 @@ namespace Media_Player
             if (fetched_playlist != null)
             {
                 bool did_edit = HaveChangesBeenMade();
-
-
-
                 if(did_edit)
                 {
                     string new_addition_str = string.Empty;
@@ -186,7 +183,7 @@ namespace Media_Player
                         List<string> playlist_items = new List<string>();
                         playlist_items = fetched_playlist.playlist_items;
                         Dictionary<string, int> item_counts = fetched_playlist.item_playcount;
-                        for (int i = 0; i <  playlist_items.Count; i++)
+                        for (int i = playlist_items.Count - 1; i >= 0; i--)
                         {
                             string item = playlist_items[i];
                             if (unchecked_items.Contains(item))
@@ -209,6 +206,7 @@ namespace Media_Player
                         PlaylistHandler.DeletePlaylist(name);
                         PlaylistHandler.SavePlaylist(edited_playlist);
                         main_page.GeneratePlaylist(edited_playlist);
+                        fetched_playlist = edited_playlist;
                         StatisticsObject.TotalTracksInPlaylists = Math.Clamp(StatisticsObject.TotalTracksInPlaylists + amount_for_statistics, 0, int.MaxValue); // so it doesnt turn negative
                         MessageBox.Show($"Completed edit of {name}!", "Completed playlist editing", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Close();
@@ -267,6 +265,29 @@ namespace Media_Player
             main_page.GeneratePlaylist(edited_playlist);
             MessageBox.Show($"Completed edit of {fetched_playlist.name}!", "Completed playlist editing", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App? app = App.Current as App;
+            if (app == null || fetched_playlist == null) return;
+
+            MainWindow? mw = app.GetMainWindow();
+            if (mw == null) return;
+
+            mw.playlist_contents.Items.Clear();
+            int count = 0;
+            foreach (string obj in fetched_playlist.playlist_items)
+            {
+                mw.playlist_contents.Items.Add(new ListViewItem
+                {
+                    Tag = obj,
+                    Name = $"Item{count}",
+                    Content = System.IO.Path.GetFileName(obj),
+                });
+                count++;
+            }
+            mw.playlist_items_display.Text = $"Items: {count}";
         }
     }
 }

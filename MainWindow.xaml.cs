@@ -80,10 +80,6 @@ namespace Media_Player
                 List<string> previouslySaved = SettingsHandler.GetPreviouslySavedFiles();
                 if (previouslySaved.Count > 0)
                 {
-                    foreach (string s in previouslySaved)
-                    {
-                        Console.WriteLine(s);
-                    }
                     LoadFiles(previouslySaved.ToArray(), false);
                 }
             }
@@ -129,6 +125,24 @@ namespace Media_Player
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (fetched_settings == null) return;
+            string auto_update_file = System.IO.Path.Combine(AppContext.BaseDirectory, "auto_update.cfg");
+            if (File.Exists(auto_update_file))
+            {
+                bool auto_update = File.ReadAllText(auto_update_file) == "true";
+                if (auto_update)
+                {
+                    await UpdateManager.CheckForUpdates();
+                }
+            }
+            
+            if (fetched_settings.announce_updater_ver == true)
+            {
+                bool? is_latest = await UpdateManager.IsLatestUpdater();
+                Debug.WriteLine($"Is latest: {is_latest}");
+                if (is_latest == false && MessageBox.Show($"Updater is not on the latest version. Would you like to update it? You can disable this popup from the settings.", "Updater is not up to date.", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                   await UpdateManager.CheckForUpdates();
+            }
+
             if (fetched_settings.delete_old_backups == true)
             {
                 await Externals.ClearOldBackups(fetched_settings.backup_lifespan);
@@ -266,19 +280,16 @@ namespace Media_Player
                 Thread.Sleep(1000); // each second updates the bar
             }
         }
+        private static readonly Random random = new Random();
         public void Shuffle() // shuffles playlist items using the fisher-yates shuffle
         {
-            Random random = new Random();
-            if (previous_order.Count <= 0)
+            if (!previous_order.Any())
             {
-                foreach (ListViewItem x in playlist_contents.Items)
-                {
-                    previous_order.Add(x);
-                }
+                previous_order.AddRange(playlist_contents.Items.Cast<ListViewItem>());
             }
             playlist_contents.Items.Clear();
             List<ListViewItem> copy = new List<ListViewItem>(previous_order);
-            for (int i = 0; i < previous_order.Count - 1; i++)
+            for (int i = 0; i < previous_order.Count; i++)
             {
                 int randInt = random.Next(i + 1);
                 ListViewItem temp = copy[i];
@@ -1035,8 +1046,8 @@ namespace Media_Player
 
         private void info_menu_btn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("""
-                Media Player v1.3.0
+            MessageBox.Show($"""
+                Media Player {UpdateManager.GetCurrentAppVersion()}
 
                 Getting started:
                 To start using the media player you can either open a folder or some files to add to the list.

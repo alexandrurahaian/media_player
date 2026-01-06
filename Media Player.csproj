@@ -8,8 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Sprites\Light\media_player.ico</ApplicationIcon>
-    <FileVersion>1.4.1</FileVersion>
-    <AssemblyVersion>1.4.1</AssemblyVersion>
+    <FileVersion>1.5.0</FileVersion>
+    <AssemblyVersion>1.5.0</AssemblyVersion>
     <Company></Company>
     <Description>C# lightweight media player with playlist support.</Description>
     <Copyright>©️ Răhăian Alexandru 2025-2026</Copyright>
@@ -67,6 +67,7 @@
     <None Remove="Sprites\skip.png" />
     <None Remove="Sprites\unmute.png" />
     <None Remove="Sprites\view_stats.png" />
+    <None Remove="updater.exe" />
   </ItemGroup>
 
   <ItemGroup>
@@ -76,10 +77,13 @@
 
   <ItemGroup>
     <Content Include="app_config.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="media.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="updater.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Sprites\clear_stats.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
