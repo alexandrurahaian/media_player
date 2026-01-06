@@ -280,19 +280,16 @@ namespace Media_Player
                 Thread.Sleep(1000); // each second updates the bar
             }
         }
+        private static readonly Random random = new Random();
         public void Shuffle() // shuffles playlist items using the fisher-yates shuffle
         {
-            Random random = new Random();
-            if (previous_order.Count <= 0)
+            if (!previous_order.Any())
             {
-                foreach (ListViewItem x in playlist_contents.Items)
-                {
-                    previous_order.Add(x);
-                }
+                previous_order.AddRange(playlist_contents.Items.Cast<ListViewItem>());
             }
             playlist_contents.Items.Clear();
             List<ListViewItem> copy = new List<ListViewItem>(previous_order);
-            for (int i = 0; i < previous_order.Count - 1; i++)
+            for (int i = 0; i < previous_order.Count; i++)
             {
                 int randInt = random.Next(i + 1);
                 ListViewItem temp = copy[i];
