@@ -134,9 +134,11 @@ namespace Media_Player
                     await UpdateManager.CheckForUpdates();
                 }
             }
-            else if (fetched_settings.announce_updater_ver == true)
+            
+            if (fetched_settings.announce_updater_ver == true)
             {
                 bool? is_latest = await UpdateManager.IsLatestUpdater();
+                Debug.WriteLine($"Is latest: {is_latest}");
                 if (is_latest == false && MessageBox.Show($"Updater is not on the latest version. Would you like to update it? You can disable this popup from the settings.", "Updater is not up to date.", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                    await UpdateManager.CheckForUpdates();
             }

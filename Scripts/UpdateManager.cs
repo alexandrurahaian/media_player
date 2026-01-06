@@ -43,6 +43,7 @@ namespace Media_Player.Scripts
                 IsClientInitialised = true;
                 CURRENT_APP_VERSION = GetCurrentAppVersion();
                 CURRENT_UPDATER_VERSION = GetCurrentUpdaterVersion();
+                Debug.WriteLine(CURRENT_UPDATER_VERSION);
             }
             catch (Exception ex)
             {
@@ -63,27 +64,37 @@ namespace Media_Player.Scripts
                     : tag.TrimStart('v');
         }
 
+        private static bool IsVersionNewer(string? latest, string? current)
+        {
+            if (string.IsNullOrEmpty(latest) || string.IsNullOrEmpty(current)) return false;
+
+            var latestParts = latest.Split('.').Select(int.Parse).ToArray();
+            var currentParts = current.Split('.').Select(int.Parse).ToArray();
+
+            for (int i = 0; i < Math.Max(latestParts.Length, currentParts.Length); i++)
+            {
+                int l = i < latestParts.Length ? latestParts[i] : 0;
+                int c = i < currentParts.Length ? currentParts[i] : 0;
+
+                if (l > c) return true;
+                if (l < c) return false;
+            }
+
+            return false;
+        }
+
+
         public static async Task<bool?> IsLatestUpdater()
         {
-            Version ver1, ver2;
-            if (LATEST_UPDATER_VER == null) LATEST_UPDATER_VER = await GetLatestVersion();
-            if (Version.TryParse(LATEST_UPDATER_VER, out ver1) && Version.TryParse(CURRENT_UPDATER_VERSION, out ver2))
-            {
-                if (ver1.CompareTo(ver2) > 0) return true;
-                else return false;
-            }
-            return null;
+            return IsVersionNewer(LATEST_UPDATER_VER, CURRENT_UPDATER_VERSION);
         }
 
         public static async Task CheckForUpdates()
         {
             string? latest_str = await GetLatestVersion();
             LATEST_UPDATER_VER = latest_str;
-            Version ver1 = new Version(), ver2 = new Version();
-            if (latest_str != null && Version.TryParse(latest_str, out ver1) && Version.TryParse(CURRENT_UPDATER_VERSION, out ver2))
-            {
-                if (ver1.CompareTo(ver2) > 0) await DownloadUpdate();
-            }
+            if (IsVersionNewer(LATEST_UPDATER_VER, CURRENT_UPDATER_VERSION))
+                await DownloadUpdate();
         }
         private static async Task DownloadUpdate()
         {
