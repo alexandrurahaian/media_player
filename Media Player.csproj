@@ -77,10 +77,10 @@
 
   <ItemGroup>
     <Content Include="app_config.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="media.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="updater.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

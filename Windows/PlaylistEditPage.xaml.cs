@@ -206,6 +206,7 @@ namespace Media_Player
                         PlaylistHandler.DeletePlaylist(name);
                         PlaylistHandler.SavePlaylist(edited_playlist);
                         main_page.GeneratePlaylist(edited_playlist);
+                        fetched_playlist = edited_playlist;
                         StatisticsObject.TotalTracksInPlaylists = Math.Clamp(StatisticsObject.TotalTracksInPlaylists + amount_for_statistics, 0, int.MaxValue); // so it doesnt turn negative
                         MessageBox.Show($"Completed edit of {name}!", "Completed playlist editing", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Close();
@@ -264,6 +265,29 @@ namespace Media_Player
             main_page.GeneratePlaylist(edited_playlist);
             MessageBox.Show($"Completed edit of {fetched_playlist.name}!", "Completed playlist editing", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App? app = App.Current as App;
+            if (app == null || fetched_playlist == null) return;
+
+            MainWindow? mw = app.GetMainWindow();
+            if (mw == null) return;
+
+            mw.playlist_contents.Items.Clear();
+            int count = 0;
+            foreach (string obj in fetched_playlist.playlist_items)
+            {
+                mw.playlist_contents.Items.Add(new ListViewItem
+                {
+                    Tag = obj,
+                    Name = $"Item{count}",
+                    Content = System.IO.Path.GetFileName(obj),
+                });
+                count++;
+            }
+            mw.playlist_items_display.Text = $"Items: {count}";
         }
     }
 }

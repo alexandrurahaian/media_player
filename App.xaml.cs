@@ -37,6 +37,11 @@ namespace Media_Player
 
             mw.SwitchPlayColor(to_ret);
         }
+
+        public MainWindow? GetMainWindow()
+        {
+            return Application.Current.MainWindow as MainWindow;
+        }
     }
 
 }

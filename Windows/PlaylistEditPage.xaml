@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Media_Player"
         mc:Ignorable="d"
         Background="{DynamicResource BackgroundBrush}"
-        Title="" Height="450" Width="800">
+        Title="" Height="450" Width="800"
+        Closing="Window_Closing">
     <Viewbox Stretch="Uniform">
         <Grid Width="804" Height="436">
             <TextBlock Foreground="{DynamicResource ForegroundBrush}" x:Name="playlist_item_count" FontFamily="Arial" FontSize="12" Text="Playlist Items: 0" Margin="10,10,559,410"/>
