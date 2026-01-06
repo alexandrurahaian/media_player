@@ -1046,8 +1046,8 @@ namespace Media_Player
 
         private void info_menu_btn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("""
-                Media Player v1.3.0
+            MessageBox.Show($"""
+                Media Player {UpdateManager.GetCurrentAppVersion()}
 
                 Getting started:
                 To start using the media player you can either open a folder or some files to add to the list.
