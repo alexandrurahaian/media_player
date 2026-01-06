@@ -103,6 +103,7 @@ namespace Media_Player
                         new_item.Name = item.Name;
                         new_item.Content = item.Content;
                         new_item.Click += New_item_Click;
+                        new_item.Foreground = (Brush)Application.Current.Resources["ForegroundBrush"];
                         add_song_list.Items.Add(new_item);
                     }
                 }
@@ -132,15 +133,14 @@ namespace Media_Player
         private void Item_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox ?check_box = sender as CheckBox;
-            if (check_box != null && check_box.IsChecked == false)
+            if (check_box == null) return;
+            if (check_box.IsChecked == false)
             {
                 unchecked_items.Add(check_box.Tag.ToString());
-                
+                Debug.WriteLine(check_box.Tag.ToString());
             }
-            else if (check_box != null && (check_box.IsChecked == true && unchecked_items.Contains(check_box.Tag.ToString())))
-            {
+            else if (check_box.IsChecked == true && unchecked_items.Contains(check_box.Tag.ToString()))
                 unchecked_items.Remove(check_box.Tag.ToString());
-            }
         }
 
         private void confirm_btn_Click(object sender, RoutedEventArgs e)
@@ -148,9 +148,6 @@ namespace Media_Player
             if (fetched_playlist != null)
             {
                 bool did_edit = HaveChangesBeenMade();
-
-
-
                 if(did_edit)
                 {
                     string new_addition_str = string.Empty;
