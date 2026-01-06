@@ -183,7 +183,7 @@ namespace Media_Player
                         List<string> playlist_items = new List<string>();
                         playlist_items = fetched_playlist.playlist_items;
                         Dictionary<string, int> item_counts = fetched_playlist.item_playcount;
-                        for (int i = 0; i <  playlist_items.Count; i++)
+                        for (int i = playlist_items.Count - 1; i >= 0; i--)
                         {
                             string item = playlist_items[i];
                             if (unchecked_items.Contains(item))
