@@ -6,5 +6,5 @@
   "delete_old_backups": false,
   "make_backups": true,
   "backup_lifespan": 7,
-  "announce_updater_ver": false
+  "announce_updater_ver": true
 }

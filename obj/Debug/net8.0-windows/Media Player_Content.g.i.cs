@@ -10,6 +10,5 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("app_config.json")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media.db")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("updater.exe")]
 
 

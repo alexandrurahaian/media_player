@@ -13,11 +13,14 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Media Player")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.4.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34093fd802da860e0a7bb4adb8ebbc0866257313")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("©️ Răhăian Alexandru 2025-2026")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("C# lightweight media player with playlist support.")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.5.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a1831ead827d846640ad762ba49238a0fe34b62c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Media Player")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Media Player")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.4.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.5.0")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/alexandrurahaian/media_player")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 

@@ -52,3 +52,4 @@ D:\Repos\Media Player\obj\Release\net8.0-windows\Windows\SelectPlaylistWindow.ba
 D:\Repos\Media Player\obj\Release\net8.0-windows\Windows\StatsWindow.baml
 D:\Repos\Media Player\obj\Release\net8.0-windows\Windows\ExportWindow.g.cs
 D:\Repos\Media Player\obj\Release\net8.0-windows\Windows\ExportWindow.baml
+D:\Repos\Media Player\bin\Release\net8.0-windows\updater.exe

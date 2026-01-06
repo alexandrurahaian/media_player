@@ -1,5 +1,5 @@
 ﻿Media Player
-1.4.0
+1.5.0
 
 winexe
 C#
@@ -11,8 +11,8 @@ false
 TRACE;RELEASE;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 D:\Repos\Media Player\App.xaml
 81657972516
-21349535418
-201262076487
+3-1556493446
+21-1643961458
 2041043706418
 MainWindow.xaml;Pages\PlaylistPage.xaml;Windows\CompactWindow.xaml;Windows\ExportWindow.xaml;Windows\OptionsWindow.xaml;Windows\PlaylistEditPage.xaml;Windows\SelectPlaylistWindow.xaml;Windows\StatsWindow.xaml;
 

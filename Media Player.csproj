@@ -67,7 +67,6 @@
     <None Remove="Sprites\skip.png" />
     <None Remove="Sprites\unmute.png" />
     <None Remove="Sprites\view_stats.png" />
-    <None Remove="updater.exe" />
   </ItemGroup>
 
   <ItemGroup>
@@ -80,9 +79,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="media.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="updater.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Sprites\clear_stats.png">
@@ -167,6 +163,12 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="updater.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
