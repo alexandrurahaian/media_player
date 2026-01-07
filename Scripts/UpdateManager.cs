@@ -66,24 +66,22 @@ namespace Media_Player.Scripts
 
         private static bool IsVersionNewer(string? latest, string? current)
         {
-            Debug.WriteLine($"Latest version {latest}");
-            Debug.WriteLine(current);
             if (string.IsNullOrEmpty(latest) || string.IsNullOrEmpty(current)) return false;
 
-            var latestParts = latest.Split('.').Select(int.Parse).ToArray();
-            var currentParts = current.Split('.').Select(int.Parse).ToArray();
+            var l = latest.Split('.');
+            var c = current.Split('.');
+            int max = Math.Max(l.Length, c.Length);
 
-            for (int i = 0; i < Math.Max(latestParts.Length, currentParts.Length); i++)
+            for (int i = 0; i < max; i++)
             {
-                int l = i < latestParts.Length ? latestParts[i] : 0;
-                int c = i < currentParts.Length ? currentParts[i] : 0;
-                Debug.WriteLine(l > c);
-                Debug.WriteLine(l < c);
-                if (l > c) return true;
-                if (l < c) return false;
+                int lv = i < l.Length ? int.Parse(l[i]) : 0;
+                int cv = i < c.Length ? int.Parse(c[i]) : 0;
+
+                if (lv > cv) return true;
+                if (lv < cv) return false;
             }
 
-            return true;
+            return false;
         }
 
 
