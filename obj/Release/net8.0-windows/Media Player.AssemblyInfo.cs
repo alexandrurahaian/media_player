@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCopyrightAttribute("©️ Răhăian Alexandru 2025-2026")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("C# lightweight media player with playlist support.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.5.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15c98fcf33bbb72d6d119c938d4e38a90cdcfb17")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dcefcf06dcdc93bbd4955bf7bf63de2cab9939e7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Media Player")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Media Player")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.5.0")]
