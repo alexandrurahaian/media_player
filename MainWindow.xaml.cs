@@ -3,6 +3,7 @@ using Media_Player.Scripts;
 using Media_Player.Windows;
 using Microsoft.Win32;
 using System.Collections.Immutable;
+using System.Data.Common;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Packaging;
@@ -126,6 +127,11 @@ namespace Media_Player
         {
             if (fetched_settings == null) return;
             string auto_update_file = System.IO.Path.Combine(AppContext.BaseDirectory, "auto_update.cfg");
+
+            UpdateManager.CURRENT_APP_VERSION = UpdateManager.GetCurrentAppVersion();
+            UpdateManager.CURRENT_UPDATER_VERSION = UpdateManager.GetCurrentUpdaterVersion();
+            Debug.WriteLine(UpdateManager.GetCurrentAppVersion());
+            Debug.WriteLine(UpdateManager.GetCurrentUpdaterVersion());
             if (File.Exists(auto_update_file))
             {
                 bool auto_update = File.ReadAllText(auto_update_file) == "true";
@@ -137,10 +143,25 @@ namespace Media_Player
             
             if (fetched_settings.announce_updater_ver == true)
             {
-                bool? is_latest = await UpdateManager.IsLatestUpdater();
-                Debug.WriteLine($"Is latest: {is_latest}");
-                if (is_latest == true && MessageBox.Show($"Updater is not on the latest version. Would you like to update it? You can disable this popup from the settings.", "Updater is not up to date.", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                   await UpdateManager.CheckForUpdates();
+                bool? isnt_latest = await UpdateManager.IsLatestUpdater();
+                bool? can_update_app = await UpdateManager.IsLatestApp();
+                Debug.WriteLine($"Is latest: {isnt_latest}");
+                Debug.WriteLine($"Is latest app: {can_update_app}");
+                if (isnt_latest == true || can_update_app == true)
+                {
+                    if (can_update_app == true && MessageBox.Show($"Your media player version is outdated, would you like to update it?", "Outdated version", MessageBoxButton.YesNoCancel, MessageBoxImage.Information) != MessageBoxResult.Yes) can_update_app = false;
+                    if (isnt_latest == true && MessageBox.Show("Your updater executable is outdated, would you like to update it?", "Outdated updater executable", MessageBoxButton.YesNoCancel, MessageBoxImage.Information) != MessageBoxResult.Yes) isnt_latest = false;
+
+                    // installs the updater update first before shutting down update for the main app update using the new updater.exe.
+                    if (isnt_latest == true && can_update_app == true)
+                    {
+                        await UpdateManager.CheckForUpdates();
+                        return;
+                    }
+
+                    if (isnt_latest == true) await UpdateManager.CheckForUpdates(true); // first check for updater.exe updates then use the new installer to install the new main app update.
+                    if (can_update_app == true) UpdateManager.StartUpdater(); // will shutdown app once finished
+                }
             }
 
             if (fetched_settings.delete_old_backups == true)
